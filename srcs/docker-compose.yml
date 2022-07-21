@@ -1,0 +1,105 @@
+version: "3.9"
+
+networks:
+  inception:
+    name: inception
+    driver: bridge
+
+volumes:
+  wp:
+    driver: local
+    name: wp
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/Documents/wordpress
+  db:
+    driver: local
+    name: db
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/Documents/DB
+  logs:
+    driver: local
+    name: logs
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/Documents/logs
+
+services:
+  mariadb:
+    container_name: mariadb
+    image: mariadb
+    build: ./requirements/mariadb
+    env_file:
+      - .env
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - inception
+    expose:
+      - "3306"
+    restart: always
+
+  nginx:
+    container_name: nginx
+    image: nginx
+    build: ./requirements/nginx
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - wp:/var/www/html
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+    restart: always
+
+  wordpress:
+    container_name: wordpress
+    image: wordpress
+    build: ./requirements/wordpress
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+      - redis
+    expose:
+      - "9000"
+    volumes:
+      - wp:/var/www/html
+    networks:
+      - inception
+    restart: always
+  
+  redis:
+    container_name: redis
+    image: redis
+    build: ./requirements/bonus/redis
+    env_file:
+      - .env
+    expose:
+      - "6379"
+    networks:
+      - inception
+    restart: always
+
+  ftp-server:
+    container_name: ftp-server
+    image: ftp-server
+    build: ./requirements/bonus/ftp-server
+    env_file:
+      - .env
+    ports:
+      - 0.0.0.0:20:20
+      - 0.0.0.0:21:21
+      - 21100-21110:21100-21110
+    volumes:
+      - "wp:/home/vsftpd"
+      - "logs:/var/log/vsftpd"
+    networks:
+      - inception
+    restart: always

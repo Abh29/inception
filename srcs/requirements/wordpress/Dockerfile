@@ -1,0 +1,25 @@
+FROM debian:buster
+
+RUN apt-get update && apt-get -y install \
+    php7.3 php7.3-cli php7.3-fpm \
+    php7.3-mysql wget gettext 
+
+RUN wget http://wordpress.org/latest.tar.gz
+
+RUN mkdir -p /var/www/html
+RUN chown -R www-data:www-data /var/www/html
+RUN chown -R 755 /var/www/*
+
+COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/
+COPY ./conf/wp-config.php /root/wp-config.php
+COPY ./tools/entrypoint.sh /root/entrypoint.sh
+
+RUN chmod +x /root/entrypoint.sh
+
+#RUN service php7.3-fpm start
+
+ENTRYPOINT [ "bash", "/root/entrypoint.sh" ]
+
+#CMD [ "bash" ]
+
+#CMD ["php-fpm7.3", "--nodaemonize"]

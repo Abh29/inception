@@ -1,0 +1,22 @@
+run runs a specific container on local machine, if does not exist it looks for it in docker hub
+exec run a comand on a running docker container
+pull pulls an image from dockerhub
+-d runs the docker container as a daemon bachground
+attach attaches bach to a running deamon container
+docker container does not listen to input by default, to do so you need
+to add -interactive or -i
+-t attach to the terminal from the docker container
+-it shows what's beeing desplayed on the container's terminal in 
+interactive mode
+ps return basic information
+inspect return full information about one container 
+-e set an envirnment variable 
+history shows the layers of the container
+
+ex:
+
+docker rm container_name_or_id
+docker rmi image_name_or_id
+
+docker build -t image_name path
+docker run -it --env-file env_file_path --name container_name image_name
