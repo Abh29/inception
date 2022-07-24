@@ -4,14 +4,18 @@ set -e
 
 mysql_install_db --user=root --basedir=/usr --datadir=/var/lib/mysql
 
-service mysql start
+if [ ! -e /var/lib/mysql/wp_db ]; then
 
-envsubst < db_init.sql | mysql
+    service mysql start
 
-envsubst < debian.cnf > /etc/mysql/debian.cnf
+    envsubst < db_init.sql | mysql
 
-service mysql stop
+    envsubst < debian.cnf > /etc/mysql/debian.cnf
 
-sleep 3
+    service mysql stop
+
+    sleep 3
+
+fi
 
 mysqld
