@@ -94,8 +94,8 @@ services:
     env_file:
       - .env
     ports:
-      - 0.0.0.0:20:20
-      - 0.0.0.0:21:21
+      - 20:20
+      - 21:21
       - 21100-21110:21100-21110
     volumes:
       - "wp:/home/vsftpd/mehill"

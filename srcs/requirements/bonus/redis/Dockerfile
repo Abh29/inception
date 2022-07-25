@@ -10,4 +10,4 @@ COPY    config/redis.conf   /etc/redis/redis.conf
 
 EXPOSE  6379
 
-CMD [ "redis-server" ]
+CMD [ "redis-server", "/etc/redis/redis.conf" ]

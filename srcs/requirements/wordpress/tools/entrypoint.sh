@@ -5,7 +5,7 @@ set -e
 mkdir -p /run/php/;
 touch /run/php/php7.3-fpm.pid;
 
-if [ -e latest.tar.gz ]; then
+if [ ! -e /var/www/html/wp-config.php ]; then
     
     tar -xvf latest.tar.gz -C /var/www/html --strip-components=1
     mv /root/wp-config.php /var/www/html/
