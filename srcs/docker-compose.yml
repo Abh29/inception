@@ -27,6 +27,13 @@ volumes:
       type: none
       o: bind
       device: ${HOME}/Documents/logs
+  adm:
+    driver: local
+    name: adm
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/Documents/adminer
 
 services:
   mariadb:
@@ -51,11 +58,13 @@ services:
       - "443:443"
       - "80:80"
     volumes:
-      - wp:/var/www/html
+      - wp:/var/www/mehill.42.fr/html
+      - adm:/var/www/adminer.42.fr/html
     networks:
       - inception
     depends_on:
       - wordpress
+      - adminer
     restart: always
 
   wordpress:
@@ -70,7 +79,7 @@ services:
     expose:
       - "9000"
     volumes:
-      - wp:/var/www/html
+      - wp:/var/www/mehill.42.fr/html
     networks:
       - inception
     restart: always
@@ -100,6 +109,20 @@ services:
     volumes:
       - "wp:/home/vsftpd/mehill"
       - "logs:/var/log/vsftpd"
+    networks:
+      - inception
+    restart: always
+  
+   adminer:
+    container_name: adminer
+    image: adminer
+    build: ./requirements/bonus/adminer
+    env_file:
+      - .env
+    expose:
+      - "9000"
+    volumes:
+      - adm:/var/www/adminer.42.fr/html
     networks:
       - inception
     restart: always

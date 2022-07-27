@@ -7,7 +7,12 @@ RUN apt-get update && apt-get install -y \
 
 ENV PATH=/usr/local/nginx/bin:$PATH
 
-COPY ./conf/nginx.conf /etc/nginx/conf.d/mehill.conf
+RUN mkdir -p /var/www/mehill.42.fr/html /var/www/adminer.42.fr/html
+
+
+
+COPY ./conf/mehill.42.fr    /etc/nginx/sites-available/mehill.42.fr
+COPY ./conf/adminer.42.fr    /etc/nginx/sites-available/adminer.42.fr
 COPY ./tools/entrypoint.sh .
 
 RUN chmod +x ./entrypoint.sh
@@ -15,6 +20,3 @@ RUN chmod +x ./entrypoint.sh
 EXPOSE 443
 
 ENTRYPOINT [ "bash", "./entrypoint.sh" ]
-
-# CMD ["nginx", "-g", "daemon off;"]
-
