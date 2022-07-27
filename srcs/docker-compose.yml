@@ -94,6 +94,8 @@ services:
       - "6379"
     networks:
       - inception
+    volumes:
+      - logs:/var/log/redis/
     restart: always
 
   ftp-server:
@@ -113,7 +115,7 @@ services:
       - inception
     restart: always
   
-   adminer:
+  adminer:
     container_name: adminer
     image: adminer
     build: ./requirements/bonus/adminer

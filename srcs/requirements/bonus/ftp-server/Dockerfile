@@ -15,11 +15,7 @@ RUN     chmod +x /usr/sbin/entrypoint.sh
 RUN     mkdir -p /home/vsftpd/mehill
 RUN     chown -R ftp:ftp /home/vsftpd/
 
-# VOLUME /home/vsftpd/mehill
-# VOLUME /var/log/vsftpd
 
 EXPOSE 20 21
 
 ENTRYPOINT [ "bash" ,"/usr/sbin/entrypoint.sh" ]
-
-#CMD [ "bash" ]
