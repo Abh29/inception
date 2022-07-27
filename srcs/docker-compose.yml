@@ -144,8 +144,6 @@ services:
       - .env
     expose:
       - "8081"
-    volumes:
-      - js:/var/www/mycv
     networks:
       - inception
     restart: always
