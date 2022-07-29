@@ -67,6 +67,7 @@ services:
     volumes:
       - wp:/var/www/mehill.42.fr/html
       - adm:/var/www/adminer.42.fr/html
+      - logs:/var/logs
     networks:
       - inception
     depends_on:
@@ -146,4 +147,6 @@ services:
       - "8081"
     networks:
       - inception
+    volumes:
+      - js:/var/www/mycv.42.fr/html
     restart: always

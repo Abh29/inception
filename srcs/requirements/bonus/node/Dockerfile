@@ -3,9 +3,9 @@ FROM debian:buster
 RUN apt update && apt upgrade && apt install -y \
     nodejs npm
 
-RUN mkdir -p /var/www/mycv.42.fr/public && cd /var/www/mycv.42.fr
+RUN mkdir -p /var/www/mycv.42.fr/html
 
-WORKDIR     /var/www/mycv.42.fr
+WORKDIR     /var/www/mycv.42.fr/html
 
 RUN npm init -y
 RUN npm install express --save

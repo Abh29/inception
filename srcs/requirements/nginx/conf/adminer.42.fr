@@ -3,7 +3,7 @@ server {
     listen 80;
     listen [::]:80;
 
-    server_name adminer.42.fr;
+    server_name adminer.42.fr www.adminer.42.fr;
 
     return 301 https://$server_name$request_uri;
 }
@@ -17,7 +17,7 @@ root /var/www/adminer.42.fr/html;
 listen 443 ssl;
 listen [::]:443 ssl;
 
-server_name adminer.42.fr;
+server_name adminer.42.fr www.adminer.42.fr;
 
 ssl_certificate /etc/ssl/certs/ca.crt;
 ssl_certificate_key /etc/ssl/private/ca.key;
@@ -42,4 +42,4 @@ location ~ \.php$ {
 
 }
 
-access_log  /var/www/adminer.42.fr/log_file;
+access_log  /var/logs/adminer_42_logs;

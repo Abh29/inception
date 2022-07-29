@@ -1,35 +1,15 @@
-# #The Nginx server instance
-# server{
-#     listen 80;
-#     server_name mycv.42.fr;
-#     location / {
-#         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-#         proxy_set_header Host $host;
-#         proxy_pass node:8081;
-#         proxy_http_version 1.1;
-#         proxy_set_header Upgrade $http_upgrade;
-#         proxy_set_header Connection "upgrade";
-#         # location /overview {
-#         #     proxy_pass http://127.0.0.1:3000$request_uri;
-#         #     proxy_redirect off;
-#         # }
-#     }
-# }
-
 server {
     listen 80;
     server_name mycv.42.fr www.mycv.42.fr;
 
-    #Configures the publicly served root directory
-    #Configures the index file to be served
     root /var/www/mycv.42.fr/html;
-    index index.html index.htm;
+    index index.html index.js;
 
     #These lines create a bypass for certain pathnames
-    #www.example.com/test.js is now routed to port 3000
+    #www.example.com/test.js is now routed to port 8081
     #instead of port 80
     # location ~* \.(js)$ {
-    #     proxy_pass node:8081;
+    #     proxy_pass http://node:8081;
     #     proxy_set_header Host $host;
     # }
     location / {
@@ -37,3 +17,6 @@ server {
         proxy_set_header Host $host;
     }
 }
+
+
+access_log  /var/logs/mycv_logs;

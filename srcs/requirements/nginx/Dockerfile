@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
 
 ENV PATH=/usr/local/nginx/bin:$PATH
 
-RUN mkdir -p /var/www/mehill.42.fr/html /var/www/adminer.42.fr/html /var/www/mycv.42.fr/html
+RUN mkdir -p /var/www/mehill.42.fr/html /var/www/adminer.42.fr/html /var/www/mycv.42.fr/html /var/logs
 
 
 
