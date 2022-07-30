@@ -150,3 +150,14 @@ services:
     volumes:
       - js:/var/www/mycv.42.fr/html
     restart: always
+  
+  mosquitto:
+    container_name: mosquitto
+    image: mosquitto
+    build: ./requirements/bonus/mosquitto
+    ports:
+      - "1883:1883"
+    env_file:
+      - .env
+    restart: always
+  

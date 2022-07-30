@@ -1,7 +1,9 @@
 #!/bin/bash
 
 mkdir -p "/home/vsftpd/${FTP_USER}"
-chown -R ftp:ftp /home/vsftpd/
+adduser ${FTP_USER} --disabled-password
+echo "${FTP_USER}:${FTP_USER}" | /usr/sbin/chpasswd &> /dev/null
+chown -R ${FTP_USER}:${FTP_USER} /home/vsftpd/
 
 # mkdir -p /var/run/vsftpd/empty
 # chown -R ftp:ftp /var/run/vsftpd/empty
@@ -35,3 +37,4 @@ fi
 
 # Run vsftpd:
 vsftpd /etc/vsftpd/vsftpd.conf
+
