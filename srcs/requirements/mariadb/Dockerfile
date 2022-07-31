@@ -2,9 +2,8 @@ FROM debian:buster
 
 LABEL author="mehill"
 
-RUN apt update && apt upgrade
-
-RUN apt install -y mariadb-server gettext
+RUN apt update && apt upgrade && apt install -y \
+    mariadb-server gettext
 
 RUN rm -f /etc/my.cnf.d/mariadb-server.cnf && rm -f /etc/my.cnf.d/my.cnf
 COPY conf/my.cnf /etc/my.cnf.d/my.cnf

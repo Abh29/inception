@@ -6,4 +6,6 @@ RUN     apt update && apt upgrade && apt install -y \
 COPY    tools/entrypoint.sh    .
 COPY    conf/default.conf   /etc/mosquitto/conf.d/default.conf
 
+EXPOSE  1883
+
 ENTRYPOINT [ "bash", "./entrypoint.sh" ]
