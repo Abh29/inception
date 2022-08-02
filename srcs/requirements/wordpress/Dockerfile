@@ -8,7 +8,7 @@ RUN wget http://wordpress.org/latest.tar.gz
 
 RUN mkdir -p /var/www/mehill.42.fr/html
 RUN chown -R www-data:www-data /var/www/mehill.42.fr
-RUN chown -R 755 /var/www/*
+RUN chmod -R g+rwX /var/www/mehill.42.fr
 
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/
 COPY ./conf/wp-config.php /root/wp-config.php

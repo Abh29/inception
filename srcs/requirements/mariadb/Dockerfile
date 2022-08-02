@@ -10,6 +10,7 @@ COPY conf/my.cnf /etc/my.cnf.d/my.cnf
 COPY conf/my.cnf /etc/mysql/my.cnf
 COPY ./tools/db_init.sql .
 COPY ./tools/entrypoint.sh .
+COPY ./tools/wp_db.sql  .
 COPY conf/debian.cnf .
 
 RUN mkdir -p /run/mysqld /var/lib/mysql && chown -R mysql /var/lib/mysql

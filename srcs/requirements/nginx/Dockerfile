@@ -13,6 +13,8 @@ RUN mkdir -p /var/www/mehill.42.fr/html \
     /var/www/jupyter.42.fr/html \
     /var/logs
 
+RUN chown -R www-data:www-data /var/www/mehill.42.fr
+RUN chmod -R g+rwX /var/www/mehill.42.fr
 
 
 COPY ./conf/mehill.42.fr    /etc/nginx/sites-available/mehill.42.fr

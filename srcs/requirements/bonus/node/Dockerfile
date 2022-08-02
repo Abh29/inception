@@ -4,15 +4,15 @@ RUN apt update && apt upgrade && apt install -y \
     nodejs npm
 
 RUN mkdir -p /var/www/mycv.42.fr/html
+COPY tools/server.js   /var/www/mycv.42.fr/html/server.js
+COPY public/*   /var/www/mycv.42.fr/html/public/
+
 
 WORKDIR     /var/www/mycv.42.fr/html
 
 RUN npm init -y
 RUN npm install express --save
 
-COPY tools/server.js   ./server.js
-COPY public/*   ./public/
-
 EXPOSE 8081
 
-CMD [ "node", "server.js" ]
+CMD [ "node", "/var/www/mycv.42.fr/html/server.js" ]

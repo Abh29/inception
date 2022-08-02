@@ -8,7 +8,7 @@ build:
 
 volumes:
 	mkdir -p ~/Documents/wordpress ~/Documents/node ~/Documents/DB
-	mkdir -p ~/Documents/logs ~/Documents/adminer ~/Documents/jupyter
+	mkdir -p ~/Documents/logs ~/Documents/adminer
 
 clean:
 	bash srcs/tools/fclean.sh
